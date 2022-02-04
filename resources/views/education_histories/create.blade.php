@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>practitioner App</title>
+    <title>Practitioners Management App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
@@ -19,7 +19,6 @@
 
     <h1 class="h3 mb-3 fw-normal">Create education history</h1>
     <div class="row g-5">
-        <!-- if there are creation errors, they will show here -->
         {{ HTML::ul($errors->all()) }}
 
         {{ Form::open(array('url' => sprintf('practitioners/%d/education_histories', $practitionerId))) }}

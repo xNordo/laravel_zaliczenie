@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>practitioner App</title>
+    <title>Practitioners Management App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
@@ -19,7 +19,6 @@
 
         <h1 class="h3 mb-3 fw-normal">Edit a practitioner</h1>
         <div class="row g-5">
-            <!-- if there are creation errors, they will show here -->
             {{ HTML::ul($errors->all()) }}
 
             {{ Form::model($practitioner, ['route' => ['practitioners.update', $practitioner->id], 'method' => 'PUT']) }}
@@ -87,7 +86,7 @@
 
                 <div class="col-md-2">
                     {{ Form::label('publications', 'Publications') }}
-                    {{ Form::number('publications', $practitioner->phoneNo, array('class' => 'form-control')) }}
+                    {{ Form::number('publications', $practitioner->publications, array('class' => 'form-control')) }}
                 </div>
             </div>
 
@@ -102,7 +101,7 @@
             </div>
 
 
-            {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+            {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
 
             {{ Form::close() }}
         </div>

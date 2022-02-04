@@ -93,9 +93,8 @@ class PractitionerController extends Controller
                 ->withInput($request->except('password'));
         } else {
             $practitioner = Practitioner::find($id);
-            $practitioner->name = $request->get('name');
             $this->assignPractitionerData($request, $practitioner);
-            $practitioner->save();
+            $practitioner->update();
 
             // redirect
             Session::flash('message', 'Successfully updated practitioner!');
@@ -114,6 +113,7 @@ class PractitionerController extends Controller
 
     private function assignPractitionerData(Request $request, Practitioner $practitioner): void
     {
+        $practitioner->name = $request->get('name');
         $practitioner->surname = $request->get('surname');
         $practitioner->email = $request->get('email');
         $practitioner->cdv_email = $request->get('cdv_email');
@@ -134,9 +134,9 @@ class PractitionerController extends Controller
         return [
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'email' => 'required|unique:practitioner,email|max:255',
-            'cdv_email' => 'unique:practitioner,cdv_email|max:255',
-            'phoneNo' => 'unique:practitioner,phoneNo|max:11',
+            'email' => 'required|max:255',
+            'cdv_email' => 'max:255',
+            'phoneNo' => 'max:11',
             'cv' => 'max:255',
             'practitioner_card' => 'max:255',
             'thesis' => 'max:11',
