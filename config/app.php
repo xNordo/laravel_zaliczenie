@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Reliese\Coders\CodersServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        \MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
 
     ],
 
