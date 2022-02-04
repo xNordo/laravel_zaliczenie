@@ -64,7 +64,7 @@
                 </tr>
                 <tr>
                     <th>linkedin</th>
-                    <td>{{ $practitioner->linkedin }}</td>
+                    <td><a href="https://{{ $practitioner->linkedin }}" target="_blank">{{ $practitioner->linkedin }}</a></td>
                 </tr>
                 <tr>
                     <th>Commercial experience years</th>
