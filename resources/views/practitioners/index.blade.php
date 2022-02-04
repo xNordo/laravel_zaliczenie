@@ -2,24 +2,22 @@
 <html>
 <head>
     <title>practitioner App</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
+<main>
+    <div class="container">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="{{ URL::to('practitioners') }}">View All practitioners</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ URL::to('practitioners/create') }}">Create a practitioner</a>
+            </ul>
+        </header>
+    </div>
 
-    <nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ URL::to('practitioners') }}">practitioner Alert</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="{{ URL::to('practitioners') }}">View All practitioners</a></li>
-            <li><a href="{{ URL::to('practitioners/create') }}">Create a practitioner</a>
-        </ul>
-    </nav>
+    <h1>All practitioners</h1>
 
-    <h1>All the practitioners</h1>
-
-    <!-- will be used to show any messages -->
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
@@ -29,8 +27,9 @@
         <tr>
             <td>ID</td>
             <td>Name</td>
+            <td>Surname</td>
             <td>Email</td>
-            <td>practitioner Level</td>
+            <td>CDV Email</td>
             <td>Actions</td>
         </tr>
         </thead>
@@ -39,27 +38,24 @@
             <tr>
                 <td>{{ $practitioner->id }}</td>
                 <td>{{ $practitioner->name }}</td>
+                <td>{{ $practitioner->surname }}</td>
                 <td>{{ $practitioner->email }}</td>
-                <td>{{ $practitioner->practitioner_level }}</td>
+                <td>{{ $practitioner->cdv_email}}</td>
 
-                <!-- we will also add show, edit, and delete buttons -->
                 <td>
 
-                    <!-- delete the practitioner (uses the destroy method DESTROY /practitioners/{id} -->
-                    <!-- we will add this later since its a little more complicated than the other two buttons -->
-
-                    <!-- show the practitioner (uses the show method found at GET /practitioners/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('practitioners/' . $practitioner->id) }}">Show this practitioner</a>
-
-                    <!-- edit this practitioner (uses the edit method found at GET /practitioners/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ URL::to('practitioners/' . $practitioner->id . '/edit') }}">Edit this practitioner</a>
-
+                    <a class="btn btn-small btn-success btn-sm" href="{{ URL::to('practitioners/' . $practitioner->id) }}">Details</a>
+                    <a class="btn btn-small btn-info btn-sm" href="{{ URL::to('practitioners/' . $practitioner->id . '/edit') }}">Edit</a>
+                    {{ Form::open(array('url' => 'practitioners/' . $practitioner->id, 'class' => 'pull-right')) }}
+                    {{ Form::hidden('_method', 'DELETE') }}
+                    {{ Form::submit('Delete', array('class' => 'btn btn-small btn-danger btn-sm', 'style' => 'margin-top: 4px;')) }}
+                    {{ Form::close() }}
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
+</main>
 </div>
 </body>
 </html>
