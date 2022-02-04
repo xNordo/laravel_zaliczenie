@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Practitioner;
@@ -62,7 +64,6 @@ class PractitionerController extends Controller
     {
         $practitioner = Practitioner::find($id);
 
-        // show the view and pass the practitioner to it
         return View::make('practitioners.show')
             ->with('practitioner', $practitioner);
     }
@@ -83,10 +84,7 @@ class PractitionerController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $rules = array(
-            'name' => 'required',
-            'email' => 'required|email',
-        );
+        $rules = $this->resolveRules();
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -105,13 +103,10 @@ class PractitionerController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id): RedirectResponse
     {
-        $shark = Practitioner::find($id);
-        $shark->delete();
+        $practitioner = Practitioner::find($id);
+        $practitioner->delete();
 
         Session::flash('message', 'Successfully deleted the practitioner!');
         return Redirect::to('practitioners');

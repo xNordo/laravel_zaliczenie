@@ -16,6 +16,11 @@
         </header>
     </div>
 
+
+    @if (Session::has('message'))
+        <div class="alert alert-info">{{ Session::get('message') }}</div>
+    @endif
+
     <div class="row">
         <div class="col">
             <h3>Practitioner Details</h3>
@@ -93,7 +98,49 @@
             </table>
         </div>
         <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h3>Education History</h3>
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-success btn-md" href="{{ URL::to(sprintf('practitioners/%d/education_histories/create/', $practitioner->id)) }}">Add new</a>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered ">
+                <thead>
+                <tr>
+                    <th scope="col">Degree</th>
+                    <th scope="col">Specialisation</th>
+                    <th scope="col">Certificate</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($practitioner->educationHistories as $educationHistory)
+                    <tr>
+                        <td> {{ $educationHistory->degree }} </td>
+                        <td> {{ $educationHistory->specialisation }} </td>
+                        <td>
+                            @if($educationHistory->certificate)
+                                Yes
+                            @else
+                                No
+                            @endif
+                        </td>
+                        <td>
+                            <a class="btn btn-small btn-info btn-sm" href="{{ URL::to(sprintf('practitioners/%s/education_histories/%d/edit/', $practitioner->id, $educationHistory->id)) }}">Edit</a>
+                            {{ Form::open(array('url' => sprintf('practitioners/%s/education_histories/%d/', $practitioner->id, $educationHistory->id), 'class' => 'pull-right')) }}
+                            {{ Form::hidden('_method', 'DELETE') }}
+                            {{ Form::submit('Delete', array('class' => 'btn btn-small btn-danger btn-sm', 'style' => 'margin-top: 4px;')) }}
+                            {{ Form::close() }}
+                        </td>
+                    </tr>
+                @endforeach
+                <tr>
 
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 

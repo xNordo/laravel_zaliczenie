@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EducationHistoryController;
 use App\Http\Controllers\PractitionerController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('practitioners', PractitionerController::class);
+
+Route::resource('practitioners.education_histories', EducationHistoryController::class)
+    ->except(['show', 'index']);

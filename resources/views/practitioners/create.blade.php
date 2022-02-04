@@ -102,7 +102,7 @@
             </div>
 
 
-        {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
+        {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
 
         {{ Form::close() }}
     </div>
