@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -12,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Practitioner
- * 
+ *
  * @property int $id
  * @property string|null $name
  * @property string|null $surname
@@ -29,17 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool|null $participation_in_finished_project
  * @property bool|null $team_management
  * @property int|null $publications
- * 
- * @property Collection|Cdvactivity[] $cdvactivities
- * @property Collection|Contactsource[] $contactsources
- * @property Collection|Cooperation[] $cooperations
- * @property Collection|Educationhistory[] $educationhistories
- * @property Collection|Learninghistory[] $learninghistories
- * @property Collection|Practitioneravalability[] $practitioneravalabilities
- * @property Collection|Company[] $companies
- * @property Collection|Language[] $languages
- * @property Collection|Reference[] $references
  *
+ * @property Collection|EducationHistory[] $educationHistories
  * @package App\Models
  */
 class Practitioner extends Model
@@ -75,49 +64,8 @@ class Practitioner extends Model
 		'publications'
 	];
 
-	public function cdvactivities()
-	{
-		return $this->hasMany(Cdvactivity::class);
-	}
-
-	public function contactsources()
-	{
-		return $this->hasMany(Contactsource::class, 'reference_practitioner');
-	}
-
-	public function cooperations()
-	{
-		return $this->hasMany(Cooperation::class);
-	}
-
-	public function educationhistories()
-	{
-		return $this->hasMany(Educationhistory::class);
-	}
-
-	public function learninghistories()
-	{
-		return $this->hasMany(Learninghistory::class);
-	}
-
-	public function practitioneravalabilities()
-	{
-		return $this->hasMany(Practitioneravalability::class);
-	}
-
-	public function companies()
-	{
-		return $this->belongsToMany(Company::class, 'practitionercompany', 'practitioner_id', 'comany_id')
-					->withPivot('position', 'is_owner');
-	}
-
-	public function languages()
-	{
-		return $this->belongsToMany(Language::class, 'practitionerlanguage');
-	}
-
-	public function references()
-	{
-		return $this->hasMany(Reference::class);
-	}
+	public function educationHistories()
+    {
+        return $this->hasMany(EducationHistory::class);
+    }
 }

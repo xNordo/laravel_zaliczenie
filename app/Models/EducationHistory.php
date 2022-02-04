@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -23,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EducationHistory extends Model
 {
-	protected $table = 'educationhistory';
+	protected $table = 'education_history';
 	public $incrementing = false;
 	public $timestamps = false;
 
